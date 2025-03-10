@@ -1,103 +1,67 @@
 <html>
-	<head>
-		<title>Data Entry</title>
-	</head>	
-	<style>
-		form label {
-			width:200px;
-			display:inline-block;
-			line-height: 1.8;
-		}
-		p {
-			text-indent: 150px;
-		}
-		table, th, td {
-		  border: 1px solid black;
-		}
-		th {
-			background-color: #96D4D4;
-		}
-		th, td {
-			padding: 5px;
-		}
-	</style>			
-	<body>
-		<form name="infoForm">
-			<div>
-				<label>Full Name</label>
-				<input type="text" name="fullname" value=""> 
-			</div>
-			<div>
-				<label> Date of Birth</label>
-				<input type="text" name="birthdate" value="">
-			</div>
-			<div>
-				<label>Street Address</label>
-				<input type="text" name="address" value="">
-			</div>
-			<div>
-				<label>City</label>
-				<select name="city" value="">
-					<option value="Select">Select</option>
-					<option value="Toronto">Toronto</option>
-					<option value="Quebec City">Quebec City</option>
-				</select>
-			</div>
-			<div>
-				<label>Province</label>
-				<select name="province" value="">
-					<option value="Select">Select</option>
-					<option value="ON">ON</option>
-					<option value="QU">QU</option>
-				</select>
-			</div>
-			<div>
-				<label>Postal Code</label>
-				<input type="text" name="postal" value="">
-			</div>
-			<button type="submit" onclick='check(); return false'>Submit</button>
-		</form>
-		
-		<script>
-		function check()
-		{
-			var table = document.getElementById("myTable");
 
-			var row = table.insertRow(1);
+<head>
+	<title>Data Entry</title>
+	<link rel="stylesheet" href="css/dataEntry.css">
+</head>
+<script language="javascript" src="dataEntry.js"></script>
+<body>
+	<form name="entryForm" id="entryForm" onsubmit="return false;">
+		<div>
+			<label for="itemid">ID</label>
+			<input type="text" name="itemid" id="itemid" disabled/>
+		</div>
+		<div>
+			<label for="fullname">Full Name</label>
+			<input type="text" name="fullname" id="fullname"/>
+		</div>
+		<div>
+			<label for="birthdate"> Date of Birth</label>
+			<input type="date" name="birthdate" id="birthdate"/>
+		</div>
+		<div>
+			<label for="address">Street Address</label>
+			<input type="text" name="address" id="address"/>
+		</div>
+		<div>
+			<label for="city">City</label>
+			<input type="text" name="city" id="city"/>
+		</div>
+		<div>
+			<label for="province">Province</label>
+			<select name="province" id="province">
+				<option value="" selected disabled hidden>Select</option>
+				<option value="AL">AL</option>
+				<option value="ON">ON</option>
+				<option value="QU">QU</option>
+			</select>
+		</div>
+		<div>
+			<label for="postal">Postal Code</label>
+			<input type="text" name="postal" id="postal"/>
+		</div>
+		<input type="hidden" name="itemId" id="itemId">
+		<input type="submit" name="submitButton" value="Submit" onclick='submitForm(this.form); return false'/>
+		<input type="reset" name="resetButton" value="Clear" onclick='resetForm(this.form)'/>
+	</form>
 
-			var cell1 = row.insertCell(0);
-			var cell2 = row.insertCell(1);
-			var cell3 = row.insertCell(2);
-			var cell4 = row.insertCell(3);
-			var cell5 = row.insertCell(4);
-			var cell6 = row.insertCell(5);
-
-			cell1.innerHTML = document.infoForm.fullname.value;
-			cell2.innerHTML =  document.infoForm.birthdate.value;
-			cell3.innerHTML =  document.infoForm.address.value;
-			cell4.innerHTML =  document.infoForm.city.value;
-			if (document.infoForm.city.value == "Select"){
-							cell4.innerHTML = "";
-						}
-			cell5.innerHTML =  document.infoForm.province.value;
-			if (document.infoForm.province.value == "Select"){
-							cell5.innerHTML = "";
-						}
-			cell6.innerHTML =  document.infoForm.postal.value;
-		}		
-		</script>
-		
-		<p>Data Entry Grid</p>
-		<table>
-			<table id="myTable">
+	<table id="dataTable">
+		<caption>Data Entry Grid <button class="expAction" onclick="exportData()">Export</button></caption>
+		<thead>
 			<tr>
-		    	<th>Full Name</th>
-		    	<th>Date of Birth</th>
+				<th>ID</th>
+				<th>Full Name</th>
+				<th>Date of Birth</th>
 				<th>Street Address</th>
-		    	<th>City</th>
+				<th>City</th>
 				<th>Province</th>
 				<th>Postal Code</th>
-		 	</tr>
-		</table>
-	</body>
+				<th id='dataAction'></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+
 </html>
